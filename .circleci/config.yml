@@ -120,12 +120,12 @@ workflows:
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
           rox_image: neilcar/jenkins-demo:latest
-          requires: [scan an image]
+          requires: [build]
       - rox-orb/rox-deployment-check: 
           context: rox
           name: Check deployment
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
-          rox_deployment: deployment.yml
-          requires: [check an image against build-time policies]
+          rox_deployment: deployment.yaml
+          requires: [build]
           
