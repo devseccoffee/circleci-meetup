@@ -85,7 +85,7 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
+  build-image:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -98,22 +98,22 @@ jobs:
           version: 20.10.14
       - run:
           name: "Build-Image"
-          command: "echo $LOGIN $PASSWORD $ROXURL $ROXAPI $COSIGNKEY $COSIGNPUB"
+          command: "docker build -f test ."
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  build-image:
     jobs:
-      - say-hello:
-          name: hello
+      - build-image:
+          name: build
       - rox-orb/rox-image-scan: 
           context: rox
           name: scan an image
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
           rox_image: neilcar/jenkins-demo:latest
-          requires: [hello]
+          requires: [build]
       - rox-orb/rox-image-check: 
           context: rox
           name: check an image against build-time policies
@@ -128,4 +128,4 @@ workflows:
           rox_api_token: $ROX_API_TOKEN
           rox_deployment: deployment.yml
           requires: [check an image against build-time policies]
-         
+          
