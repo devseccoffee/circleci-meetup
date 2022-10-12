@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: app-container
-    image: quay.io/rhacs-demo/sample-image:getting-started-old
+    image: quay.io/ralvares/ubi8:minimal
     ports:
     - containerPort: 8080
     securityContext:
