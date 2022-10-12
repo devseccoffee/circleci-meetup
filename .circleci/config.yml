@@ -79,8 +79,8 @@ orbs:
             type: string    
         steps:
           - run: >-
-              curl -k -L -H "Authorization: Bearer <<parameters.rox_api_token>>" https://<<parameters.rox_central_endpoint>>/api/cli/download/roxctl-linux --output ./roxctl
-          - run: chmod +x ./roxctl
+              curl -k -L -H "Authorization: Bearer <<parameters.rox_api_token>>" https://<<parameters.rox_central_endpoint>>/api/cli/download/roxctl-linux --output ./roxctl && chmod +x ./roxctl
+          #- run: chmod +x ./roxctl
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
