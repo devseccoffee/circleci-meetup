@@ -46,6 +46,9 @@ orbs:
               rox_central_endpoint: <<parameters.rox_central_endpoint>>
           - run: >-
               ./roxctl --insecure-skip-tls-verify image scan -f -e <<parameters.rox_central_endpoint>> --image <<parameters.rox_image>> --output <<parameters.output_format>> > /tmp/scanner-output.txt
+          - store_artifacts:
+              path: /tmp/scanner-output.txt
+              destination: scanner-output.txt
       rox-image-check:
         machine: true
         parameters:
@@ -117,9 +120,6 @@ workflows:
           rox_api_token: $ROX_API_TOKEN
           rox_image: quay.io/ralvares/ubi8:minimal
           requires: [build]
-      - store_artifacts:
-          path: /tmp/scanner-output.txt
-          destination: scanner-output.txt
       - rox-orb/rox-image-check: 
           context: rox
           name: Check an image against build-time policies
