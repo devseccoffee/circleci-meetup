@@ -97,7 +97,7 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run:
-          name: "Build application Container image
+          name: "Build application Container image"
           command: |
             echo $password | docker login -u $username --password-stdin 
             docker build -t quay.io/ralvares/ubi8:minimal .
