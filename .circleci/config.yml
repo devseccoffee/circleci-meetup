@@ -99,7 +99,7 @@ jobs:
       - run:
           name: "Build application Container image"
           command: |
-            echo $password | docker login -u $username --password-stdin 
+            echo $password | docker login -u $username --password-stdin quay.io
             docker build -t quay.io/ralvares/ubi8:minimal .
             docker push quay.io/ralvares/ubi8:minimal
 # Invoke jobs via workflows
