@@ -105,7 +105,7 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  build-image:
+  Build application Container image:
     jobs:
       - Build application Container image:
           context: quay
