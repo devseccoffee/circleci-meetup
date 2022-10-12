@@ -97,15 +97,18 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run:
-          name: "Build-Image"
-          command: "docker build -t test ."
-
+          name: "Build application Container image
+          command: |
+            echo $password | docker login -u $username --password-stdin 
+            docker build -t quay.io/ralvares/ubi8:minimal .
+            docker push quay.io/ralvares/ubi8:minimal
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   build-image:
     jobs:
       - build-image:
+          context: quay
           name: build
       - rox-orb/rox-image-scan: 
           context: rox
