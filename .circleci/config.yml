@@ -112,14 +112,14 @@ workflows:
     jobs:
       - Build application Container image:
           context: quay
-          name: build
+          name: Build application Container image
       - rox-orb/rox-image-scan:
           context: rox
           name: Scan an image
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
           rox_image: quay.io/ralvares/ubi8:minimal
-          requires: [build]
+          requires: [Build application Container image]
       - rox-orb/rox-image-check: 
           context: rox
           name: Check an image against build-time policies
@@ -129,7 +129,7 @@ workflows:
           requires: [Scan an image]
       - rox-orb/rox-deployment-check: 
           context: rox
-          name: Check deployment
+          name: Check deployment against build-time policies 
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
           rox_deployment: deployment.yaml
