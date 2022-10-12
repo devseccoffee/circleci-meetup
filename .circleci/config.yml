@@ -112,14 +112,14 @@ workflows:
           name: scan an image
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
-          rox_image: neilcar/jenkins-demo:latest
+          rox_image: quay.io/ralvares/ubi8:minimal
           requires: [build]
       - rox-orb/rox-image-check: 
           context: rox
           name: check an image against build-time policies
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
-          rox_image: neilcar/jenkins-demo:latest
+          rox_image: quay.io/ralvares/ubi8:minimal
           requires: [build]
       - rox-orb/rox-deployment-check: 
           context: rox
