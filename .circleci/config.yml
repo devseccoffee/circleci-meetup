@@ -45,7 +45,7 @@ orbs:
               rox_api_token: <<parameters.rox_api_token>>
               rox_central_endpoint: <<parameters.rox_central_endpoint>>
           - run: >-
-              ./roxctl --insecure-skip-tls-verify image scan -e <<parameters.rox_central_endpoint>> --image <<parameters.rox_image>> --output <<parameters.output_format>>
+              ./roxctl --insecure-skip-tls-verify image scan -f -e <<parameters.rox_central_endpoint>> --image <<parameters.rox_image>> --output <<parameters.output_format>>
       rox-image-check:
         machine: true
         parameters:
