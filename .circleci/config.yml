@@ -111,7 +111,6 @@ workflows:
           context: quay
           name: build
       - rox-orb/rox-image-scan:
-          working_directory: /tmp
           context: rox
           name: Scan an image
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
