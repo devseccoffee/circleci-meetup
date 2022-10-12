@@ -123,12 +123,12 @@ workflows:
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
           rox_image: quay.io/ralvares/ubi8:minimal
-          requires: [build]
+          requires: [Scan an image]
       - rox-orb/rox-deployment-check: 
           context: rox
           name: Check deployment
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
           rox_deployment: deployment.yaml
-          requires: [build]
+          requires: [Scan an image]
           
