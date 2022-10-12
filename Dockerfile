@@ -5,4 +5,4 @@ FROM registry.access.redhat.com/ubi8/ubi
 
 #COPY log4j-rce-1.0-SNAPSHOT-jar-with-dependencies.jar /workdir
 
-#USER 1001
+USER 1001
