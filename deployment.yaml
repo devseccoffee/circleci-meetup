@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
+  namespace: meetup
   name: prod-app
   labels:
     app: prod-app
