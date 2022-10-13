@@ -1,7 +1,4 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-
 orbs:
   rox-orb:
     jobs:
@@ -103,8 +100,8 @@ jobs:
           name: "Build application Container image"
           command: |
             echo $password | docker login -u $username --password-stdin quay.io
-            docker build -t quay.io/ralvares/ubi8:minimal .
-            docker push quay.io/ralvares/ubi8:minimal
+            docker build -t quay.io/ralvares/myapp:latest .
+            docker push quay.io/ralvares/myapp:latest
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -118,14 +115,14 @@ workflows:
           name: Scan an image
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
-          rox_image: quay.io/ralvares/ubi8:minimal
+          rox_image: quay.io/ralvares/myapp:latest
           requires: [Build application Container image]
       - rox-orb/rox-image-check: 
           context: rox
           name: Check an image against build-time policies
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
-          rox_image: quay.io/ralvares/ubi8:minimal
+          rox_image: quay.io/ralvares/myapp:latest
           requires: [Scan an image]
       - rox-orb/rox-deployment-check: 
           context: rox

@@ -1,1 +1,1 @@
-# circleci-meetup
+# meetup-circleci

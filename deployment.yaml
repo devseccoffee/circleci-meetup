@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: app-container
-    image: quay.io/ralvares/ubi8:minimal
+    image: quay.io/ralvares/myapp:latest
     ports:
     - containerPort: 8080
     securityContext:
