@@ -1,4 +1,7 @@
+# CircleCI configuration file
+
 version: 2.1
+
 orbs:
   rox-orb:
     jobs:
