@@ -6,10 +6,18 @@ metadata:
   labels:
     app: prod-app
 spec:
+  automountServiceAccountToken: false
   containers:
   - name: app-container
-    image: quay.io/ralvares/myapp:latest
+    image: quay.io/ralvares/myapp:v1
     ports:
     - containerPort: 8080
     securityContext:
-      privileged: true
+      privileged: false
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
