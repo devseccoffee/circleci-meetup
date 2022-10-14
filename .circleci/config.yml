@@ -103,9 +103,10 @@ jobs:
           name: "Build application Container image"
           command: |
             echo $password | docker login -u $username --password-stdin quay.io
-            docker build -t quay.io/ralvares/myapp:latest .
-            docker push quay.io/ralvares/myapp:latest
+            docker build -t quay.io/ralvares/myapp:v1 .
+            docker push quay.io/ralvares/myapp:v1
 # Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   Build application Container image:
     jobs:
@@ -117,14 +118,14 @@ workflows:
           name: Scan an image
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
-          rox_image: quay.io/ralvares/myapp:latest
+          rox_image: quay.io/ralvares/myapp:v1
           requires: [Build application Container image]
       - rox-orb/rox-image-check: 
           context: rox
           name: Check an image against build-time policies
           rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
           rox_api_token: $ROX_API_TOKEN
-          rox_image: quay.io/ralvares/myapp:latest
+          rox_image: quay.io/ralvares/myapp:v1
           requires: [Scan an image]
       - rox-orb/rox-deployment-check: 
           context: rox
