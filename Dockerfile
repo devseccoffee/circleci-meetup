@@ -4,8 +4,7 @@ COPY . /usr/src/poc
 WORKDIR /usr/src/poc
 RUN mvn clean && mvn package
 
-FROM alpine
-#FROM registry.access.redhat.com/ubi8/ubi
+FROM registry.access.redhat.com/ubi8/ubi
 
 #RUN mkdir /workdir && dnf update -y && dnf -y clean all --enablerepo='*' && rpm -e --nodeps $(rpm -qa '*rpm*' '*dnf*' '*libsolv*' '*hawkey*' 'yum*' 'curl')
 
