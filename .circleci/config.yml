@@ -105,6 +105,22 @@ jobs:
             echo $password | docker login -u $username --password-stdin quay.io
             docker build -t quay.io/ralvares/myapp:latest .
             docker push quay.io/ralvares/myapp:latest
+  generate-netpol:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: quay.io/ralvares/roxctl:netpol
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - checkout
+      - run:
+          name: "Generate Network Policies"
+          command: "roxctl generate netpol kubernetes-manifests > network-policies.yaml"
+      - store_artifacts:
+          path: network-policies.yaml
+          destination: network-policies.yaml
+
 # Invoke jobs via workflows
 workflows:
   Build application Container image:
@@ -112,6 +128,8 @@ workflows:
       - Build application Container image:
           context: quay
           name: Build application Container image
+      - generate-netpol:
+          name: Generate Network Policies
       - rox-orb/rox-image-scan:
           context: rox
           name: Scan an image
