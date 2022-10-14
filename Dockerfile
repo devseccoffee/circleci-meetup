@@ -4,7 +4,8 @@ COPY . /usr/src/poc
 WORKDIR /usr/src/poc
 RUN mvn clean && mvn package
 
-FROM registry.access.redhat.com/ubi8/ubi
+FROM alpine
+#FROM registry.access.redhat.com/ubi8/ubi
 
 RUN mkdir /workdir
 
