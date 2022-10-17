@@ -128,8 +128,8 @@ workflows:
       - build-container:
           context: quay
           name: Build application Container image
-      #- generate-netpol:
-      #    name: Generate Network Policies
+      - generate-netpol:
+          name: Generate Network Policies
       - rox-orb/rox-image-scan:
           context: rox
           name: Scan an image
@@ -137,18 +137,18 @@ workflows:
           rox_api_token: $ROX_API_TOKEN
           rox_image: quay.io/ralvares/myapp:latest
           requires: [Build application Container image]
-#      - rox-orb/rox-image-check: 
-#          context: rox
-#          name: Check an image against build-time policies
-#          rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
-#          rox_api_token: $ROX_API_TOKEN
-#          rox_image: quay.io/ralvares/myapp:latest
-#          requires: [Scan an image]
-#      - rox-orb/rox-deployment-check: 
-#          context: rox
-#          name: Check deployment against build-time policies 
-#          rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
-#          rox_api_token: $ROX_API_TOKEN
-#          rox_deployment: deployment.yaml
-#          requires: [Scan an image]
+      - rox-orb/rox-image-check: 
+          context: rox
+          name: Check an image against build-time policies
+          rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
+          rox_api_token: $ROX_API_TOKEN
+          rox_image: quay.io/ralvares/myapp:latest
+          requires: [Scan an image]
+      - rox-orb/rox-deployment-check: 
+          context: rox
+          name: Check deployment against build-time policies 
+          rox_central_endpoint: $ROX_CENTRAL_ENDPOINT
+          rox_api_token: $ROX_API_TOKEN
+          rox_deployment: deployment.yaml
+          requires: [Scan an image]
           
