@@ -116,7 +116,7 @@ jobs:
       - checkout
       - run:
           name: "Generate Network Policies"
-          command: "roxctl generate netpol kubernetes-manifests > network-policies.yaml"
+          command: "roxctl generate netpol kubernetes-manifests --fail > network-policies.yaml"
       - store_artifacts:
           path: network-policies.yaml
           destination: network-policies.yaml
