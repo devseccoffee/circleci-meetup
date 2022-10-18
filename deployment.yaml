@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  namespace: meetup
+  namespace: circleci
   name: prod-app
   labels:
     app: prod-app
