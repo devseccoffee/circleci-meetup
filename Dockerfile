@@ -10,7 +10,7 @@ USER root
 #RUN  dnf update -y && dnf -y clean all --enablerepo='*' && rpm -e --nodeps $(rpm -qa '*rpm*' '*dnf*' '*libsolv*' '*hawkey*' 'yum*' 'curl')
 
 RUN mkdir /workdir && \
-    echo '<h1 style="text-align: center;"><span style="color: #000000;"><strong>Hello World <img src="https://html-online.com/editor/tiny4_9_11/plugins/emoticons/img/smiley-cool.gif" alt="cool" /></strong></span></h1>' > /var/www/html/index.html
+    echo '<h1 style="text-align: center;"><span style="color: #000000;"><strong>Hello World</strong></span></h1>' > /var/www/html/index.html
 
 COPY --from=builder /usr/src/poc/target/log4j-rce-1.0-SNAPSHOT-jar-with-dependencies.jar /workdir
 
