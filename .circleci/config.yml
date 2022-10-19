@@ -23,7 +23,7 @@ orbs:
               rox_api_token: <<parameters.rox_api_token>>
               rox_central_endpoint: <<parameters.rox_central_endpoint>>
           - run: >-
-              sed -i "s/latest/${CIRCLE_SHA1}/g" <<parameters.rox_deployment>> && cat <<parameters.rox_deployment>> && ./roxctl --insecure-skip-tls-verify deployment check -e <<parameters.rox_central_endpoint>> --file <<parameters.rox_deployment>>
+              sed -i "s/latest/${CIRCLE_SHA1}/g" <<parameters.rox_deployment>> && ./roxctl --insecure-skip-tls-verify deployment check -e <<parameters.rox_central_endpoint>> --file <<parameters.rox_deployment>>
       rox-image-scan:
         machine: true
         parameters:
@@ -103,7 +103,7 @@ jobs:
           name: "Build application Container image"
           command: |
             echo $password | docker login -u $username --password-stdin quay.io
-            docker build -t quay.io/ralvares/myapp:${CIRCLE_SHA1} .
+            docker build --label=repository_name=${CIRCLE_PROJECT_REPONAME} --label=branch=${CIRCLE_BRANCH} --label=repository_url=${CIRCLE_REPOSITORY_URL} -t quay.io/ralvares/myapp:${CIRCLE_SHA1} .
             docker push quay.io/ralvares/myapp:${CIRCLE_SHA1}
   generate-netpol:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
