@@ -2,9 +2,9 @@ apiVersion: v1
 kind: Pod
 metadata:
   namespace: circleci
-  name: prod-app
+  name: myapp
   labels:
-    app: prod-app
+    app: myapp
 spec:
   containers:
   - name: app-container
