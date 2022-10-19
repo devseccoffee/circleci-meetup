@@ -11,5 +11,3 @@ spec:
     image: quay.io/ralvares/myapp:latest
     ports:
     - containerPort: 8080
-    securityContext:
-      privileged: true
