@@ -23,7 +23,7 @@ orbs:
               rox_api_token: <<parameters.rox_api_token>>
               rox_central_endpoint: <<parameters.rox_central_endpoint>>
           - run: >-
-              sed -i "s/latest/${CIRCLE_SHA1}/g" <<parameters.rox_deployment>> && ./roxctl --insecure-skip-tls-verify deployment check -e <<parameters.rox_central_endpoint>> --file <<parameters.rox_deployment>>
+              sed -i "s/latest/${CIRCLE_SHA1}/g" <<parameters.rox_deployment>> && cat <<parameters.rox_deployment>> && ./roxctl --insecure-skip-tls-verify deployment check -e <<parameters.rox_central_endpoint>> --file <<parameters.rox_deployment>>
       rox-image-scan:
         machine: true
         parameters:
