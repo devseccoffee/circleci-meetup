@@ -93,13 +93,13 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: cimg/base:stable
-    resource_class: devseccoffee/kind
+    #resource_class: devseccoffee/kind
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      #- setup_remote_docker:
-      #    version: 20.10.14
+      - setup_remote_docker:
+          version: 20.10.14
       - run:
           name: "Build application Container image"
           command: |
@@ -111,6 +111,7 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: quay.io/ralvares/roxctl:netpol
+    resource_class: devseccoffee/kind  
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
