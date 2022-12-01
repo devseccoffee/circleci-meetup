@@ -1,4 +1,4 @@
-FROM maven:3.8.6-openjdk-18 as builder 
+FROM docker.io/maven:3.8.6-openjdk-18 as builder 
 
 COPY . /usr/src/poc
 WORKDIR /usr/src/poc
